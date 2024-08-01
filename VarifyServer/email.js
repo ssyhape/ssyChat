@@ -13,5 +13,17 @@ let transport = nodemailer.createTransport({
 });
 
 function SendMail(mailOptions_) {
-    return new Promise()
+    return new Promise(function(resolve,reject) {
+        transport.sendMail(mailOptions_, function(error,info) {
+            if(error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log("邮件已成功发送：" + info.response)
+                resolve(info.response)
+            }
+        });
+    })
 }
+
+module.exports.SendMail = SendMail
