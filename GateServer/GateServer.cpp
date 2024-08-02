@@ -10,9 +10,8 @@ int main()
     try
     {
         // 从配置读取
-        ConfigMgr gCfgMgr;
+        auto& gCfgMgr = ConfigMgr::Inst();
         std::string gate_port_str = gCfgMgr["GateServer"]["Port"];
-        varifyServciePort = "127.0.0.1:" + gCfgMgr["VarifyServer"]["Port"];
         unsigned short port = atoi(gate_port_str.c_str());
         net::io_context ioc{ 1 };
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);

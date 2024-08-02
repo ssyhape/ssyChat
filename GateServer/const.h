@@ -20,5 +20,3 @@ enum ERRORCODE {
 
 class ConfigMgr;
 extern ConfigMgr gCfgMgr;
-// varify Service port 
-extern std::string varifyServciePort;

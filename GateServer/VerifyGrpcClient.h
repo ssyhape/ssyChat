@@ -51,6 +51,15 @@ public:
         connections_.pop();
         return context;
     }
+
+    void returnConnection(std::unique_ptr<VarifyService::Stub> context) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (b_stop_) {
+            return;
+        }
+        connections_.push(std::move(context));
+        cond_.notify_one();
+    }
     void Close() {
         b_stop_ = true;
         cond_.notify_all();
@@ -76,22 +85,26 @@ public:
         GetVarifyRsp reply;
         GetVarifyReq request;
         request.set_email(email);
-        Status status = stub_->GetVarifyCode(&context, request, &reply);
+        auto stub = pool_->getConnection();
+        Status status = stub->GetVarifyCode(&context, request, &reply);
         if (status.ok()) {
+            pool_->returnConnection(std::move(stub)); //将连接放回池子 
             return reply;
         }
         else {
+            pool_->returnConnection(std::move(stub));
             reply.set_error(ERRORCODE::ERROR_RPC);
             return reply;
         }
     }
 private:
     VerifyGrpcClient() {
-        std::cout << "varify service port is" << varifyServciePort << std::endl;
-        std::shared_ptr<Channel> channel = grpc::CreateChannel(varifyServciePort, grpc::InsecureChannelCredentials());
-        stub_ = VarifyService::NewStub(channel);
+        auto& gCfgMgr = ConfigMgr::Inst();
+        std::string host = gCfgMgr["VarifyServer"]["Host"];
+        std::string port = gCfgMgr["VarifyServer"]["Port"];
+        pool_.reset(new RPConPool(5, host, port));
     }
 
-    std::unique_ptr<VarifyService::Stub> stub_;
+    std::unique_ptr<RPConPool> pool_;
 };
 
