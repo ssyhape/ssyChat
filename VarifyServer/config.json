@@ -2,5 +2,16 @@
     "email":{
         "user":"m18936203389@163.com",
         "pass":"RLODIOEIPEWTDZZC"
+    },
+
+    "mysql": {
+        "host": "112.124.42.101",
+        "port": 3308,
+        "passwd": "123456"
+    },
+    "redis":{
+        "host": "112.124.42.101",
+        "port": 6380,
+        "passwd": "123456"
     }
 }
