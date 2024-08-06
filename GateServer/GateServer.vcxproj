@@ -104,10 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\vcpkg\installed\x64-windows\include\google\protobuf;D:\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\vcpkg\installed\x64-windows\debug\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>abseil_dll.lib;absl_flags_commandlineflag.lib;absl_flags_commandlineflag_internal.lib;absl_flags_config.lib;absl_flags_internal.lib;absl_flags_marshalling.lib;absl_flags_parse.lib;absl_flags_private_handle_accessor.lib;absl_flags_program_name.lib;absl_flags_reflection.lib;absl_flags_usage.lib;absl_flags_usage_internal.lib;absl_log_flags.lib;address_sorting.lib;cares.lib;gpr.lib;grpc.lib;grpc_plugin_support.lib;grpc_unsecure.lib;grpc++.lib;grpc++_alts.lib;grpc++_error_details.lib;grpc++_reflection.lib;grpc++_unsecure.lib;grpcpp_channelz.lib;libcrypto.lib;libprotobufd.lib;libprotobuf-lited.lib;libprotocd.lib;libssl.lib;re2.lib;upb.lib;zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,12 +122,15 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalOptions>-D_WIN32_WINNT=0x0A00 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\vcpkg\installed\x64-windows\include\google\protobuf;D:\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\vcpkg\installed\x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>abseil_dll.lib;absl_flags_commandlineflag.lib;absl_flags_commandlineflag_internal.lib;absl_flags_config.lib;absl_flags_internal.lib;absl_flags_marshalling.lib;absl_flags_parse.lib;absl_flags_private_handle_accessor.lib;absl_flags_program_name.lib;absl_flags_reflection.lib;absl_flags_usage.lib;absl_flags_usage_internal.lib;absl_log_flags.lib;address_sorting.lib;cares.lib;gpr.lib;grpc.lib;grpc_plugin_support.lib;grpc_unsecure.lib;grpc++.lib;grpc++_alts.lib;grpc++_error_details.lib;grpc++_reflection.lib;grpc++_unsecure.lib;grpcpp_channelz.lib;libcrypto.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;libssl.lib;re2.lib;upb.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -134,6 +140,8 @@
     <ClCompile Include="GateServer.cpp" />
     <ClCompile Include="HttpConnection.cpp" />
     <ClCompile Include="LogicSystem.cpp" />
+    <ClCompile Include="message.grpc.pb.cc" />
+    <ClCompile Include="message.pb.cc" />
     <ClCompile Include="RedisMgr.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="VerifyGrpcClient.cpp" />
@@ -145,13 +153,15 @@
     <ClInclude Include="CServer.h" />
     <ClInclude Include="HttpConnection.h" />
     <ClInclude Include="LogicSystem.h" />
+    <ClInclude Include="message.grpc.pb.h" />
+    <ClInclude Include="message.pb.h" />
     <ClInclude Include="RedisMgr.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="VerifyGrpcClient.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.init" />
+    <None Include="config.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

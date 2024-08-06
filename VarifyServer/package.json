@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node service.js"
   },
   "author": "",
   "license": "ISC",
@@ -11,6 +11,7 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.11.1",
     "@grpc/proto-loader": "^0.7.13",
+    "ioredis": "^5.4.1",
     "nodemailer": "^6.9.14",
     "uuid": "^10.0.0"
   }

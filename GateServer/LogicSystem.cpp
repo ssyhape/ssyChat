@@ -1,5 +1,6 @@
 #include "LogicSystem.h"
 #include "HttpConnection.h"
+#include "VerifyGrpcClient.h"
 
 // get·½·¨×¢²á
 void LogicSystem::RegGet(std::string url, HttpHandler handler) {

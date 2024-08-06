@@ -1,6 +1,7 @@
 const grpc = require('@grpc/grpc-js')
 const message_proto = require('./proto')
 const const_module = require('./const')
+const config_module = require('./config')
 const { v4: uuidv4 } = require('uuid');
 const emailModule = require('./email');
 const redis_module = require('./redis')
@@ -16,7 +17,7 @@ async function GetVarifyCode(call, callback) {
             if (uniqueId.length > 4) {
                 uniqueId = uniqueId.substring(0,4)
             }
-            let bres = await redis_module.SetRedisExpire(onst_module.code_prefix+call.request.email, uniqueId,600)
+            let bres = await redis_module.SetRedisExpire(const_module.code_prefix+call.request.email, uniqueId,600)
             if(!bres){
                 callback(null, { email:  call.request.email,
                     error:const_module.Errors.RedisErr
@@ -53,7 +54,9 @@ function main() {
     var server = new grpc.Server()
     server.addService(message_proto.VarifyService.service, { GetVarifyCode: GetVarifyCode })
     server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
-        //server.start()
+       // server.start()
         console.log('varify server started')        
     })
 }
+
+main()

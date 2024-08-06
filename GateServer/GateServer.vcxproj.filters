@@ -42,6 +42,12 @@
     <ClCompile Include="RedisMgr.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="message.grpc.pb.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="message.pb.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CServer.h">
@@ -74,8 +80,14 @@
     <ClInclude Include="RedisMgr.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="message.grpc.pb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="message.pb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.init" />
+    <None Include="config.ini" />
   </ItemGroup>
 </Project>
